@@ -14,11 +14,11 @@ jobs:
     - uses: actions/checkout@v2
 
     # Next1 : enable plugin and see if hit cache - NO hit, test cache with more push 4
-    # - name: Setup Gradle
-    #   uses: gradle/gradle-build-action@v2
-    #   with:
-    #     gradle-home-cache-cleanup: true
-    #     cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' }}
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-home-cache-cleanup: true
+        cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' }}
 
     # build to see if have gradle chache, try more push after main(NOT dev) was cache enabled
     - name: Run build  
