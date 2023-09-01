@@ -1,0 +1,27 @@
+# feature/* branch test
+name: Child Cache Demo
+on:
+  push: 
+    branches: 
+      - feature/*
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    # Next1 : enable plugin and see if hit cache - NO hit, test cache with more push 2
+    # - name: Setup Gradle
+    #   uses: gradle/gradle-build-action@v2
+    #   with:
+    #     gradle-home-cache-cleanup: true
+    #     cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/dev' }}
+
+    # build to see if hit cache
+    - name: Run build
+      run: ./gradlew build
+
+    # Next2 : merge plugin and see if hit cache - first main NO hit
+    # Next3 : create PR2 and see cache HIT
